@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Plot Style
 plt.style.use("dark_background")
 plt.rcParams.update({
     "axes.facecolor": "#000000",
@@ -19,18 +20,31 @@ plt.rcParams.update({
 def nrelu(x: float) -> float:
     return (x - abs(x)) / 2
 
-portfolio = pd.read_csv("balance_history_2025-08-01_to_2026-08-03.csv")
-portfolio['Date'] = pd.to_datetime(portfolio['Date'])
-
-spx = pd.read_csv("spx_prices_2025-08-01_to_2026-08-03.csv")
-spx['Date'] = pd.to_datetime(spx['Date'])
-
+# Plot Setup
 fig, axes = plt.subplots(
     nrows=3,
     ncols=1,
     figsize=(12, 8),
     sharex=True,
 )
+
+# Data Reading and Date Format Matching
+portfolio = pd.read_csv("balance_history_2025-08-01_to_2026-08-03.csv")
+portfolio['Date'] = pd.to_datetime(portfolio['Date'])
+
+spx = pd.read_csv("spx_prices_2025-08-01_to_2026-08-03.csv")
+spx['Date'] = pd.to_datetime(spx['Date'])
+
+axes[0].plot(portfolio["Date"], portfolio["Close"])
+axes[0].set_title("Portfolio Balance")
+axes[0].set_ylabel("Balance")
+axes[0].tick_params(axis="y", labelleft=False)
+axes[0].grid(alpha=0.3)
+
+axes[1].plot(spx["Date"], spx["Close"], color="purple")
+axes[1].set_title("S&P 500")
+axes[1].set_ylabel("SPX")
+axes[1].grid(alpha=0.3)
 
 portfolio["Percent Change"] = (
     portfolio["Close"] / portfolio["Close"].iloc[0] - 1
@@ -39,16 +53,6 @@ portfolio["Percent Change"] = (
 spx["Percent Change"] = (
     spx["Close"] / spx["Close"].iloc[0] - 1
 ) * 100
-
-axes[0].plot(portfolio["Date"], portfolio["Close"])
-axes[0].set_title("Portfolio Balance")
-axes[0].set_ylabel("Balance")
-axes[0].grid(alpha=0.3)
-
-axes[1].plot(spx["Date"], spx["Close"], color="orange")
-axes[1].set_title("S&P 500")
-axes[1].set_ylabel("SPX")
-axes[1].grid(alpha=0.3)
 
 axes[2].plot(
     portfolio["Date"],
@@ -95,3 +99,4 @@ print(f"Annualized Sortino: {portfolio_sortino_annualized:.2f}")
 
 fig.tight_layout()
 plt.show()
+fig.savefig("figs/1y_benchmark_comp.png")
