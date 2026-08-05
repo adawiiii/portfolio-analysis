@@ -1,0 +1,8 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+/Lib
+/Include
+/Scripts
+/share
+
+pyvenv.cfg
+balance_history_2025-08-01_to_2026-08-03.csv
