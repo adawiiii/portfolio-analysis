@@ -1,5 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Polygon
 import pandas as pd
 
 # Plot Style
@@ -11,10 +14,12 @@ plt.rcParams.update({
     "axes.labelcolor": "white",
     "xtick.color": "white",
     "ytick.color": "white",
-    "grid.color": "#333333",
+    "grid.color": "#CCCCCC",
     "legend.facecolor": "#111111",
     "legend.edgecolor": "#222222",
-    "font.size": 10
+    "font.size": 10,
+    "grid.linestyle": ":",
+    "grid.linewidth": 1
 })
 
 def nrelu(x: float) -> float:
