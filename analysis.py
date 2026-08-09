@@ -14,7 +14,7 @@ plt.rcParams.update({
     "axes.labelcolor": "white",
     "xtick.color": "white",
     "ytick.color": "white",
-    "grid.color": "#CCCCCC",
+    "grid.color": "#ffffff",
     "legend.facecolor": "#111111",
     "legend.edgecolor": "#222222",
     "font.size": 10,
